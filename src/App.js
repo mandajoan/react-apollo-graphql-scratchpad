@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import Courses from './courses';
+
 import logo from './logo.svg';
 import './App.css';
+import 'font-awesome/css/font-awesome.min.css';
+
+//creates instance of apollo client with endpoint for queries
+const client = new ApolloClient({
+    uri: "https://vm8mjvrnv3.lp.gql.zone/graphql"
+});
+
+
+
+//wrap app in appollo provider - to connect intance of apollo client 
 
 class App extends Component {
+
+    componentDidMount() {
+        window.introAnimation()
+    }
   render() {
-    return (
+      return (
+      <ApolloProvider client={client}>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+                    
+                      <Courses /> 
+                  </header>
+                 
+              </div>
+     </ApolloProvider>
     );
   }
 }
